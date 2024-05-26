@@ -1,0 +1,19 @@
+.window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+.goBack {
+    top: 10%;
+    right: 5%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+    border-radius: 50%;
+    background-color: rgb(226, 226, 226);
+    cursor: pointer;
+}
