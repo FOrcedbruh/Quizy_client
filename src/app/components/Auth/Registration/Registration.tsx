@@ -4,6 +4,8 @@ import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import { registration } from '../../../../instance/auth';
 import { useAuthContext } from '../../../../context/autnContext';
+import { useNavigate } from 'react-router-dom';
+import useNotifications from '../../../../zustand/useNotifications';
 
 interface RegPropsType {
     setAuthWindowState: Dispatch<SetStateAction<boolean>>
@@ -31,14 +33,24 @@ const Registration: React.FC<RegPropsType> = ({setAuthWindowState}) => {
         'mode': 'onChange'
     });
 
+    const navigate = useNavigate();
+
+    const { setNotification } = useNotifications();
+
     const onSubmit = async (data: FormStateType) => {
         
 
         const userData = await registration(data);
-        localStorage.setItem('authUser', JSON.stringify(userData));
-        //@ts-ignore
-        setAuthUser(userData);
-
+        if (userData.username) {
+            localStorage.setItem('authUser', JSON.stringify(userData));
+            //@ts-ignore
+            setAuthUser(userData);
+            setNotification('Аккаунт успешно создан')
+            navigate('/profile');
+        } else {
+            setNotification(userData);
+        }
+        
         reset();
     }
 

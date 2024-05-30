@@ -1,0 +1,25 @@
+.main {
+    z-index: 10;
+    min-width: 300px;
+    position: absolute;
+    top: 5%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: #850f8d;
+    color: #c3ff93;
+    border-radius: 12px;
+    gap: 20px;
+}
+.main p {
+    padding: 0;
+    margin: 0;
+}
+.progress {
+    height: 2px;
+    background-color: #c3ff93;
+    border-radius: 10px;
+}

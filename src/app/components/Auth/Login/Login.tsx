@@ -1,13 +1,15 @@
 import styles from './Login.module.css';
 import Button from '../../Button/Button';
 import { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { login } from '../../../../instance/auth';
 import { useAuthContext } from '../../../../context/autnContext';
+import useNotifications from '../../../../zustand/useNotifications';
 
 
 interface LoginPropsType {
-    setAuthWindowState: Dispatch<SetStateAction<boolean>>
+    setAuthWindowState: Dispatch<SetStateAction<boolean>>,
 }
 
 interface FormStateType {
@@ -16,6 +18,8 @@ interface FormStateType {
 }
 
 const Login: React.FC<LoginPropsType> = ({setAuthWindowState}) => {
+
+    const {  setNotification } = useNotifications()
 
     const { setAuthUser } = useAuthContext()
 
@@ -31,11 +35,21 @@ const Login: React.FC<LoginPropsType> = ({setAuthWindowState}) => {
         'mode': 'onChange'
     });
 
+    const navigate = useNavigate()
+
     const onSubmit = async (data: FormStateType) => {
         const userData = await login(data);
-        localStorage.setItem('authUser', JSON.stringify(userData));
-        //@ts-ignore
-        setAuthUser(userData);
+        if (userData.username) {
+            localStorage.setItem('authUser', JSON.stringify(userData));
+            //@ts-ignore
+            setAuthUser(userData);
+            setNotification('Успешный вход в аккаунт');
+            navigate('/profile');
+        } else {
+            setNotification(userData);
+        }
+        
+        
         reset();
     }
 

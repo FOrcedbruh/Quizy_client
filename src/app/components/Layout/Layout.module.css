@@ -45,3 +45,64 @@
     font-weight: 600;
     color: #000;
 }
+.user {
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.user a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.user a:hover {
+    background-color: #cacaca;
+}
+.menuBtn {
+    border-radius: 50%;
+    cursor: pointer;
+}
+.menuBtn:hover {
+    background-color: #cacaca;
+}
+
+
+.menu {
+    min-width: 200px;
+    padding: 20px 10px;
+    top: 5%;
+    left: 88%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+    background-color: #e4e4e4;
+    border-radius: 12px;
+}
+.menu li {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: #000;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #850f8d;
+    transition: all .3s ease;
+}
+.menu li:hover {
+    background-color: #7c7c7c;
+}
+.menu li a {
+    color: #850f8d;
+    text-decoration: none;
+    font-weight: 600;
+}

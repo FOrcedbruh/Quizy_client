@@ -1,16 +1,15 @@
 import Registration from "../Registration/Registration";
 import Login from "../Login/Login";
 import styles from './AuthPage.module.css';
-import { useState } from "react";
+import {  useState } from "react";
 import crossIcon from './../../../../images/cross.svg';
 import { useNavigate } from "react-router-dom";
-
 
 const AuthPage: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const goBack = () => navigate(-1);
+    const goBack = () => navigate('/');
 
 
     const [authWindowState, setAuthWindowState] = useState<boolean>(false);

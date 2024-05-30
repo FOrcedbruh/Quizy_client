@@ -1,5 +1,4 @@
 import axios from "axios";
-import { IUser } from "../types/IUser";
 
 const instance = axios.create({
     baseURL: 'http://localhost:8080/',
@@ -16,22 +15,49 @@ interface authFuncsType {
 
 
 export const registration = async (props: authFuncsType) => {
+    try {
+        const res = await instance.post('auth/registration', {
+            username: props.username,
+            email: props.email,
+            password: props.password
+        });
+    
+        return res.data;
+    } catch (error) {
+        //@ts-ignore
+        return error.response.data.message;
+    }
 
-    const res = await instance.post('auth/registration', {
-        username: props.username,
-        email: props.email,
-        password: props.password
-    });
-
-    return res.data;
+  
 }
 
 export const login = async (props: authFuncsType) => {
 
-    const res = await instance.post('auth/login', {
-        email: props.email,
-        password: props.password
-    });
+    try {
+        const res = await instance.post('auth/login', {
+            email: props.email,
+            password: props.password
+        });
 
-    return res.data;
+        return res.data
+    } catch (error) {
+        //@ts-ignore
+        return error.response.data.message;
+    }
+
+       
+}
+
+export const logout = async () => {
+    const res = await instance.post('auth/logout');
+    localStorage.clear();
+
+    return res.data.message;
+}
+
+export const deleteAccount = async (_id: string) => {
+    const res = await instance.post(`auth/delete/${_id}`);
+    localStorage.clear();
+
+    return res.data.message;
 }

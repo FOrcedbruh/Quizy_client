@@ -14,8 +14,20 @@
     align-items: center;
 }
 .userData {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.logoutBtn {
+    align-self: flex-start;
+}
+.deleteBtn {
+    margin-top: 40vh;
+    height: fit-content;
+    justify-content: start;
+    align-items: start;
+    display: flex;
+    align-self: flex-end;
 }
