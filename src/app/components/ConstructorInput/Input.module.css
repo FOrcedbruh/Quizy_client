@@ -1,0 +1,26 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 200px;
+    width: fit-content;
+    background-color: #e4e4e4;
+    border-radius: 14px;
+    padding: 10px;
+    gap: 10px;
+}
+.main  input {
+    outline: none;
+    border: 2px solid #fff;
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+.main  input:focus {
+    border: 2px solid #c3ff93;
+}
+.aura {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+}

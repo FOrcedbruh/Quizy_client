@@ -7,6 +7,9 @@ import { logout } from "../../../instance/auth";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useAuthCheck from "../../../zustand/useAuthCheck";
 import useNotifications from "../../../zustand/useNotifications";
+import createIcon from './../../../images/createIcon.svg';
+
+
 
 interface MenuPropsType {
     setMenu: Dispatch<SetStateAction<boolean>>
@@ -74,6 +77,9 @@ const Layout: React.FC = () => {
                 <div className={styles.logo} onClick={() => navigate('/')}>
                     <img src="" />
                     <h1>Quizzy</h1>
+                </div>
+                <div className={styles.createBtn} onClick={() => navigate('/createQuiz')}>
+                    <p>Create</p><img src={createIcon} width={30} height={30} />
                 </div>
 
                 {isAuth ? 

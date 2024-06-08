@@ -5,6 +5,8 @@ import Profile from "./pages/Profile/Profile";
 import AuthPage from "./components/Auth/AuthPage/AuthPage";
 import Notification from "./components/Notification/Notification";
 import useNotifications from "../zustand/useNotifications";
+import CreatePage from "./pages/Create/Create";
+
 
 
 const App: React.FC = () => {
@@ -22,7 +24,8 @@ const App: React.FC = () => {
                         <Route path="/" element={<Home />}/>
                         <Route path="/profile" element={<Profile />}/>
                     </Route>
-                <Route path="/auth" element={<AuthPage />}/>
+                    <Route path="/createQuiz" element={<CreatePage />}/>
+                    <Route path="/auth" element={<AuthPage />}/>
                 </Routes>
             </main>
     )

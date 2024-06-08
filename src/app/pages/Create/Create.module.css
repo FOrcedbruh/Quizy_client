@@ -1,0 +1,163 @@
+.window {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 30px;
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar {
+    overflow-y: scroll;
+    background-color: #e4e4e4;
+    border-radius: 14px;
+    align-self: flex-start;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 20%;
+    padding: 20px;
+    height: 80vh;
+}
+
+.sidebar input {
+    padding: 10px 30px;
+    outline: none;
+    border-radius: 10px;
+    border: 2px solid #000;
+    transition: border .3s ease;
+}
+.sidebar input:focus {
+    border: 2px solid #c3ff93;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.header {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 40px;
+    color: #850f8d;
+    padding: 0;
+    margin: 0;
+}
+
+.backBtn {
+    align-self: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.backBtn:hover {
+    background-color: #e4e4e4;
+}
+.backBtn p {
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    user-select: none;
+}
+.categories div {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: start;
+    gap: 40px;
+}
+.category {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 18px;
+    transition: all .3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.category p {
+    padding: 5px;
+    margin: 0;
+}
+
+.quiz {
+    padding: 20px;
+    display: flex;
+    width: 600px;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: #850f8d;
+    min-height: 300px;
+    border-radius: 24px;
+    color: #fff;
+    gap: 30px;
+}
+
+.constructorInputs {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    height: fit-content;
+    width: 400px;
+    gap: 20px;
+}
+
+
+.container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+
+.container ul li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+    padding: 20px 30px;
+    background-color: #580a5e;
+    border-radius: 14px;
+}
