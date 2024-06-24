@@ -1,4 +1,5 @@
 import styles from './Button.module.css';
+import { motion } from 'framer-motion';
 
 interface ButtonPropsType {
     clickHandler?: () => void,
@@ -14,13 +15,16 @@ interface ButtonPropsType {
 const Button: React.FC<ButtonPropsType> = ({clickHandler, disabled, children, width, height, type}) => {
 
     return (
-        <button
+        <motion.button
+            whileTap={{
+                scale: 0.9
+            }}
             disabled={disabled}
             type={type} onClick={clickHandler} 
             className={styles.button} 
             style={{'height': height, 'width': width, 'background': disabled ? '#e0e0e0' : '#c3ff93', 'cursor': disabled ? 'not-allowed': 'pointer'}}>
             {children}
-        </button>
+        </motion.button>
     )
 }
 

@@ -14,6 +14,7 @@
     border: 2px solid #fff;
     padding: 5px 20px;
     border-radius: 10px;
+    transition: all .3s ease;
 }
 .main  input:focus {
     border: 2px solid #c3ff93;

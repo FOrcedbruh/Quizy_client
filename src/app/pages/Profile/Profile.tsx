@@ -9,12 +9,30 @@ import useAuthCheck from '../../../zustand/useAuthCheck';
 import { useNavigate } from 'react-router-dom';
 import deleteIcon from './../../../images/deleteIcon.svg';
 import { deleteAccount } from '../../../instance/auth';
+import { useGetQuizzes } from '../../../instance/quizApi';
+import { useEffect, useState } from 'react';
+import IQuiz from '../../../types/IQuiz';
+import { motion } from 'framer-motion';
+
 
 
 
 const Profile: React.FC = () => {
 
     const { authUser } = useAuthContext();
+
+    const [quizzes, setQuizzes] = useState<IQuiz[]>([]);
+
+    const getQuizzes = async () => {
+        const res = await useGetQuizzes();
+        setQuizzes(res);
+
+        console.log(res);
+    }
+
+    useEffect(() => {
+        getQuizzes();
+    }, [])
 
     //@ts-ignore
     const username = authUser?.username;
@@ -59,13 +77,49 @@ const Profile: React.FC = () => {
                 </div>
                 <h1>{username}</h1>
             </div>
+            <div className={styles.container}>
+                {quizzes.map(item => {
+                    return (
+                        <QuizCard key={item._id} props={item}/>
+                    )
+                })}
+            </div>
             <div className={styles.deleteBtn}>
                 <Button clickHandler={deleteHandle}>
                     <p>Delete account</p> <img width={24} height={24} src={deleteIcon}/>
                 </Button>
             </div>
-
         </section>
+    )
+}
+
+interface QuizCardPropsType {
+    props: IQuiz
+}
+
+const QuizCard: React.FC<QuizCardPropsType> = ({props}) => {
+
+    const [onHover, setOnHover] = useState<boolean>(false);
+
+    return (
+        <motion.div 
+        initial={{
+            opacity: 0
+        }}
+         animate={{
+            opacity: 1
+        }}
+        whileHover={{
+            x: 15,
+            y: -30
+        }}
+        onMouseOut={() => setOnHover(false)} onMouseOver={() => setOnHover(true)}
+        className={styles.card} style={{'backgroundColor': props.mainColor, 'color': props.textColor}}>
+            <motion.p animate={{
+                x: onHover ? 60  : 0
+            }}  style={{'backgroundColor': props.listColor}}>{props.title}</motion.p>
+            <i>{props.categoryName}</i>
+        </motion.div>
     )
 }
 

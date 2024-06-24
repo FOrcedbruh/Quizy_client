@@ -78,9 +78,9 @@ const Layout: React.FC = () => {
                     <img src="" />
                     <h1>Quizzy</h1>
                 </div>
-                <div className={styles.createBtn} onClick={() => navigate('/createQuiz')}>
+                {isAuth && <div className={styles.createBtn} onClick={() => navigate('/createQuiz')}>
                     <p>Create</p><img src={createIcon} width={30} height={30} />
-                </div>
+                </div>}
 
                 {isAuth ? 
                 <div className={styles.user}>

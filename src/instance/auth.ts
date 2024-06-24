@@ -1,6 +1,7 @@
 import axios from "axios";
+import { useState } from "react";
 
-const instance = axios.create({
+export const instance = axios.create({
     baseURL: 'http://localhost:8080/',
     withCredentials: true
 });
@@ -61,3 +62,4 @@ export const deleteAccount = async (_id: string) => {
 
     return res.data.message;
 }
+

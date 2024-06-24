@@ -31,3 +31,27 @@
     display: flex;
     align-self: flex-end;
 }
+.container {
+    width: 100%;
+    min-height: 30vh;
+    height: fit-content;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card {
+    width: 200px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.card p {
+    padding: 10px 20px;
+    border-radius: 12px;
+}
