@@ -4,7 +4,7 @@ import arrowIcon from './../../../images/arrow.svg';
 import { useNavigate, Link } from 'react-router-dom';
 import ICategory from '../../../types/ICategory';
 import crossIcon from './../../../images/cross.svg';
-import { color, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Input from '../../components/ConstructorInput/Input';
 import { categories } from './categories';
 import { mainColors } from './colors';
@@ -27,7 +27,7 @@ interface QuizyBodyPropsType {
     textColor: string,
     question: string,
     correct: number,
-    setAnswers: Dispatch<SetStateAction<string[]>>
+    setAnswers: Dispatch<SetStateAction<string[]>>,
 }
 
 const QuizBody: React.FC<QuizyBodyPropsType> = ({answers, setCorrect, mainColor, listColor, textColor, question, correct, setAnswers}) => {
@@ -112,7 +112,7 @@ const CreatePage: React.FC = () => {
             setQuestion('Question');
             setCorrect(0);
         } else {
-            setNotification('Enter all please ;)')
+            setNotification('Enter all please ;)');
         }
     }
 
@@ -202,14 +202,17 @@ const CreatePage: React.FC = () => {
                         </div>
                 </div>
                 <div className={styles.container}>
-                    <div className={styles.steps}>
-                        {body.map((step, index) => {
-                            return (
-                                    <QuizBody key={index} setAnswers={setAnswers} mainColor={mainColor}  textColor={textColor} listColor={listColor} correct={step.correct} answers={step.answers} question={step.question} setCorrect={setCorrect}/>
-                                )
-                        })}
-                        <QuizBody setAnswers={setAnswers} mainColor={mainColor}  textColor={textColor} listColor={listColor} correct={correct} answers={answers} question={question} setCorrect={setCorrect}/>
+                    <div>
+                        <div className={styles.steps}>
+                            {body.map((step, index) => {
+                                return (
+                                        <QuizBody key={index} setAnswers={setAnswers} mainColor={mainColor}  textColor={textColor} listColor={listColor} correct={step.correct} answers={step.answers} question={step.question} setCorrect={setCorrect}/>
+                                    )
+                            })}
+                            <QuizBody setAnswers={setAnswers} mainColor={mainColor}  textColor={textColor} listColor={listColor} correct={correct} answers={answers} question={question} setCorrect={setCorrect}/>
+                        </div>
                     </div>
+                    
                    
                     <div className={styles.constructorInputs}>
                         
@@ -220,7 +223,7 @@ const CreatePage: React.FC = () => {
                             }} className={styles.clearBtn}><p>Reset all</p><img width={24} height={24} src={clearIcon}/></motion.button>
                             
                             {!confirm && <Input placeholder='Come up a question' value={question} onChange={(e) => setQuestion(e.target.value)}/>}
-                            {!confirm && <Input BtnText='push' click={createAnswer} placeholder='Enter an answer' value={answer} onChange={(e) => setAnswer(e.target.value)}/>}
+                            {!confirm && <Input BtnText='add' click={createAnswer} placeholder='Enter an answer' value={answer} onChange={(e) => setAnswer(e.target.value)}/>}
                             
                             
 
@@ -238,7 +241,14 @@ const CreatePage: React.FC = () => {
                    
                 </div>
             </div>
-            {confirm && <motion.button className={styles.createBtn} onClick={Create}>
+            {confirm && <motion.button initial={{
+                opacity: 0,
+                y: 40
+            }}
+            animate={{
+                opacity: 1,
+                y: 0
+            }} className={styles.createBtn} onClick={Create}>
                 <h3>Create</h3> <img src={doneIcon} width={24} height={24} />
             </motion.button>}
         </section>

@@ -6,7 +6,7 @@ import AuthPage from "./components/Auth/AuthPage/AuthPage";
 import Notification from "./components/Notification/Notification";
 import useNotifications from "../zustand/useNotifications";
 import CreatePage from "./pages/Create/Create";
-
+import Quiz from "./pages/Quiz/Quiz";
 
 
 const App: React.FC = () => {
@@ -24,6 +24,7 @@ const App: React.FC = () => {
                         <Route path="/" element={<Home />}/>
                         <Route path="/profile" element={<Profile />}/>
                     </Route>
+                    <Route path="/quiz/:id" element={<Quiz />}/>
                     <Route path="/createQuiz" element={<CreatePage />}/>
                     <Route path="/auth" element={<AuthPage />}/>
                 </Routes>

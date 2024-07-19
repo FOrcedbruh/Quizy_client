@@ -1,3 +1,4 @@
+import IQuiz from "../types/IQuiz";
 import IStep from "../types/IStep";
 import { instance } from "./auth";
 
@@ -27,5 +28,11 @@ export const useGetQuizzes = async (): Promise<any> => {
     } catch (error) {
         return console.log(error)
     }
+}
+
+export const GetQuiz = async (id: string): Promise<IQuiz> => {
+    const res = await instance.post(`quiz/get/${id}`);
+
+    return res.data;
 }
 

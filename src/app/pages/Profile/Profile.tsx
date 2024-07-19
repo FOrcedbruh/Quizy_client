@@ -101,8 +101,15 @@ const QuizCard: React.FC<QuizCardPropsType> = ({props}) => {
 
     const [onHover, setOnHover] = useState<boolean>(false);
 
+    const navigate = useNavigate();
+
+
+    const onClick = () => {
+        navigate(`/quiz/${props._id}`);
+    }
+
     return (
-        <motion.div 
+        <motion.div onClick={onClick}
         initial={{
             opacity: 0
         }}

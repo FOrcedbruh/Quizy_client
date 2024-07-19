@@ -203,9 +203,9 @@
 }
 
 .steps {
+    overflow-x: scroll;
     width: 600px;
     height: fit-content;
-    overflow-x: scroll;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -227,4 +227,20 @@
 .clearBtn p {
     padding: 0;
     font-weight: 600;
+}
+
+.manageBtns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.manageBtns button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #850f8d;
+    cursor: pointer;
+    font-size: 16px;
 }
