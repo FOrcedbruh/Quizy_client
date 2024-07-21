@@ -1,6 +1,5 @@
 import styles from './Profile.module.css';
 import { useAuthContext } from '../../../context/autnContext';
-import { randomAvatar } from '../../../randomAvatars/randomAvtars';
 import Button from '../../components/Button/Button';
 import logoutIcon from './../../../images/logoutIcon.svg';
 import { logout } from '../../../instance/auth';
@@ -9,10 +8,11 @@ import useAuthCheck from '../../../zustand/useAuthCheck';
 import { useNavigate } from 'react-router-dom';
 import deleteIcon from './../../../images/deleteIcon.svg';
 import { deleteAccount } from '../../../instance/auth';
-import { useGetQuizzes } from '../../../instance/quizApi';
-import { useEffect, useState } from 'react';
+import { useGetQuizzes, deleteQuiz } from '../../../instance/quizApi';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import IQuiz from '../../../types/IQuiz';
 import { motion } from 'framer-motion';
+import startAvatar from './../../../images/avatars/batmanAvatar.svg';
 
 
 
@@ -23,6 +23,12 @@ const Profile: React.FC = () => {
 
     const [quizzes, setQuizzes] = useState<IQuiz[]>([]);
 
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+
+    const [selected, setSelected] = useState<IQuiz | null>(null);
+
+    const [deletedIndex, setDeletedIndex] = useState<number>(0);
+
     const getQuizzes = async () => {
         const res = await useGetQuizzes();
         setQuizzes(res);
@@ -32,7 +38,7 @@ const Profile: React.FC = () => {
 
     useEffect(() => {
         getQuizzes();
-    }, [])
+    }, [quizzes]);
 
     //@ts-ignore
     const username = authUser?.username;
@@ -40,8 +46,6 @@ const Profile: React.FC = () => {
     const avatar = authUser?.avatar;
     //@ts-ignore
     const _id = authUser?._id;
-
-    const randomAvatarPicture = randomAvatar();
 
     const { setNotification } = useNotifications();
 
@@ -64,6 +68,20 @@ const Profile: React.FC = () => {
         navigate('/auth')
     }
 
+    const editHandler = () => {
+        setIsEditing(!isEditing);
+        if (isEditing) {
+            setSelected(null)
+        }
+    }
+
+    const deleteQuizHandler = async (index: number) => {
+        await deleteQuiz(_id, selected?._id!, index);
+
+        setIsEditing(false);
+        setSelected(null);
+    }
+
     return (
         <section className={styles.window}>
             <div className={styles.userData}>
@@ -73,14 +91,19 @@ const Profile: React.FC = () => {
                     </Button>
                 </div>
                 <div className={styles.avatar}>
-                    <img src={avatar ? avatar : randomAvatarPicture} width={200} height={200}/>
+                    <img src={avatar ? avatar : startAvatar} width={200} height={200}/>
                 </div>
                 <h1>{username}</h1>
             </div>
+            <div className={styles.actions}>
+                <p onClick={editHandler} className={styles.editBtn}>{isEditing ? <>editing...</> : <>edit</>}</p>
+                {selected && <i onClick={() => deleteQuizHandler(deletedIndex)}>delete</i>}
+            </div>
+            
             <div className={styles.container}>
-                {quizzes.map(item => {
+                {quizzes.map((item, index) => {
                     return (
-                        <QuizCard key={item._id} props={item}/>
+                        <QuizCard index={index} setDeletedIndex={setDeletedIndex} selected={selected} setSelected={setSelected} edit={isEditing} key={item._id} props={item}/>
                     )
                 })}
             </div>
@@ -94,18 +117,34 @@ const Profile: React.FC = () => {
 }
 
 interface QuizCardPropsType {
-    props: IQuiz
+    props: IQuiz,
+    edit: boolean,
+    selected: IQuiz | null,
+    setSelected: Dispatch<SetStateAction<IQuiz | null>>,
+    setDeletedIndex: Dispatch<SetStateAction<number>>,
+    index: number
 }
 
-const QuizCard: React.FC<QuizCardPropsType> = ({props}) => {
+const QuizCard: React.FC<QuizCardPropsType> = ({props, edit, selected, setSelected, setDeletedIndex, index}) => {
 
     const [onHover, setOnHover] = useState<boolean>(false);
+    
 
     const navigate = useNavigate();
 
 
     const onClick = () => {
-        navigate(`/quiz/${props._id}`);
+        if (edit) {
+            setSelected(props);
+            setDeletedIndex(index);
+            if (selected) {
+                setSelected(null);
+                setDeletedIndex(0)
+            }
+        } else {
+            navigate(`/quiz/${props._id}`);
+        }
+        
     }
 
     return (
@@ -114,7 +153,7 @@ const QuizCard: React.FC<QuizCardPropsType> = ({props}) => {
             opacity: 0
         }}
          animate={{
-            opacity: 1
+            opacity: edit ? 0.8 :  1
         }}
         whileHover={{
             x: 15,
@@ -122,6 +161,7 @@ const QuizCard: React.FC<QuizCardPropsType> = ({props}) => {
         }}
         onMouseOut={() => setOnHover(false)} onMouseOver={() => setOnHover(true)}
         className={styles.card} style={{'backgroundColor': props.mainColor, 'color': props.textColor}}>
+            {selected === props && <p style={{'zIndex': 10, 'position': 'absolute'}}>selected</p>}
             <motion.p animate={{
                 x: onHover ? 60  : 0
             }}  style={{'backgroundColor': props.listColor}}>{props.title}</motion.p>

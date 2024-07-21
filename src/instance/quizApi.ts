@@ -36,3 +36,13 @@ export const GetQuiz = async (id: string): Promise<IQuiz> => {
     return res.data;
 }
 
+export const deleteQuiz = async (userId: string, quizId: string, index: number): Promise<string> => {
+    const res = await instance.post('/quiz/delete', {
+        quizId,
+        userId,
+        index
+    });
+
+    return res.data
+}
+

@@ -12,6 +12,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 200px;
+    width: 200px;
 }
 .userData {
     width: 100%;
@@ -54,4 +56,39 @@
 .card p {
     padding: 10px 20px;
     border-radius: 12px;
+}
+.editBtn {
+    color: blueviolet;
+    align-self: flex-start;
+    font-weight: 600;
+    padding: 7px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.actions {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+.actions i {
+    color: red;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.actions i:hover {
+    background-color: #ffb4b4;
+}
+.editBtn:hover {
+    background-color: #cacaca;
+}
+
+div.addAvatarBtn {
+    width: 200;
+    height: 200;
+    border-radius: 50%;
 }
