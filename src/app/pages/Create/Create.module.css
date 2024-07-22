@@ -159,9 +159,6 @@
     border-radius: 14px;
     cursor: pointer;
 }
-.container ul li div {
-
-}
 
 .colors {
     width: 100%;
@@ -203,7 +200,6 @@
 }
 
 .steps {
-    overflow-x: scroll;
     width: 600px;
     height: fit-content;
     display: flex;
@@ -243,4 +239,12 @@
     color: #850f8d;
     cursor: pointer;
     font-size: 16px;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

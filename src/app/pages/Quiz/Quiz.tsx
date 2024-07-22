@@ -21,7 +21,6 @@ const Quiz: React.FC = () => {
     const getData = async () => {
         const data = await GetQuiz(id!);
 
-        console.log(data)
         setQuiz(data);
     }
 

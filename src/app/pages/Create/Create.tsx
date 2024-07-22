@@ -15,9 +15,11 @@ import doneIcon from './../../../images/doneIcon.svg';
 import { useCreateQuiz } from '../../../instance/quizApi';
 import useNotifications from '../../../zustand/useNotifications';
 import clearIcon from './../../../images/clearIcon.svg';
-
-
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css'
+import 'swiper/css/effect-creative'
+import { EffectCreative } from 'swiper/modules';
+ 
 
 interface QuizyBodyPropsType {
     setCorrect: Dispatch<SetStateAction<number>>,
@@ -204,12 +206,32 @@ const CreatePage: React.FC = () => {
                 <div className={styles.container}>
                     <div>
                         <div className={styles.steps}>
-                            {body.map((step, index) => {
-                                return (
-                                        <QuizBody key={index} setAnswers={setAnswers} mainColor={mainColor}  textColor={textColor} listColor={listColor} correct={step.correct} answers={step.answers} question={step.question} setCorrect={setCorrect}/>
-                                    )
-                            })}
-                            <QuizBody setAnswers={setAnswers} mainColor={mainColor}  textColor={textColor} listColor={listColor} correct={correct} answers={answers} question={question} setCorrect={setCorrect}/>
+                            <Swiper className={styles.swiper}
+                                modules={[EffectCreative]}
+                                grabCursor={true}
+                                effect={'creative'}
+                                creativeEffect={{
+                                prev: {
+                                    shadow: true,
+                                    translate: [0, 0, -400],
+                                },
+                                next: {
+                                    translate: ['100%', 0, 0],
+                                },
+                                }}
+                             >
+                                {body.map((step, index) => {
+                                    return (
+                                            <SwiperSlide>
+                                                <QuizBody key={index} setAnswers={setAnswers} mainColor={mainColor}  textColor={textColor} listColor={listColor} correct={step.correct} answers={step.answers} question={step.question} setCorrect={setCorrect}/>
+                                            </SwiperSlide>
+                                        )
+                                })}
+                                <SwiperSlide>
+                                    <QuizBody setAnswers={setAnswers} mainColor={mainColor}  textColor={textColor} listColor={listColor} correct={correct} answers={answers} question={question} setCorrect={setCorrect}/>
+                                </SwiperSlide>
+                            </Swiper>
+                            
                         </div>
                     </div>
                     

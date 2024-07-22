@@ -32,13 +32,11 @@ const Profile: React.FC = () => {
     const getQuizzes = async () => {
         const res = await useGetQuizzes();
         setQuizzes(res);
-
-        console.log(res);
     }
 
     useEffect(() => {
         getQuizzes();
-    }, [quizzes]);
+    }, [quizzes, setQuizzes]);
 
     //@ts-ignore
     const username = authUser?.username;
