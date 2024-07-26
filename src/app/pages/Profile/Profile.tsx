@@ -9,12 +9,12 @@ import { useNavigate } from 'react-router-dom';
 import deleteIcon from './../../../images/deleteIcon.svg';
 import { deleteAccount } from '../../../instance/auth';
 import { useGetQuizzes, deleteQuiz } from '../../../instance/quizApi';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState, useRef } from 'react';
 import IQuiz from '../../../types/IQuiz';
 import { motion } from 'framer-motion';
 import startAvatar from './../../../images/avatars/batmanAvatar.svg';
-
-
+import plusIcon from './../../../images/createIcon.svg';
+import { updateAvatar } from '../../../instance/auth';
 
 
 const Profile: React.FC = () => {
@@ -80,6 +80,38 @@ const Profile: React.FC = () => {
         setSelected(null);
     }
 
+    const avatarPicker = useRef<HTMLInputElement>(null)
+
+    const [editAvatar, setEditAvatar] = useState<boolean>(false);
+    const [base64Image, setBase64Image] = useState<any>('');
+
+    const avatarHandler = () => {
+        if (avatarPicker.current) {
+            avatarPicker.current.click();
+        }
+    }
+
+    const changeAvatar = async (e: any) => {
+        // console.log(e.target.files[0]);
+        let image = e.target.files[0];
+        const reader = new FileReader();
+
+        if (image) {
+            
+
+            reader.onloadend = () => {
+                setBase64Image(reader.result);
+            }
+            reader.readAsDataURL(image);
+        }
+    }
+
+    const confirmAvatar = async () => {
+        const message = await updateAvatar(_id, base64Image);
+
+        setNotification(message);
+    }
+
     return (
         <section className={styles.window}>
             <div className={styles.userData}>
@@ -88,9 +120,12 @@ const Profile: React.FC = () => {
                         <p>Log out</p><img src={logoutIcon} width={24} height={24}/>
                     </Button>
                 </div>
-                <div className={styles.avatar}>
+                <div className={styles.avatar} onMouseOver={() => setEditAvatar(true)} onMouseLeave={() => setEditAvatar(false)}>
+                    <input type="file" className={styles.hidden} ref={avatarPicker} onChange={(e) => changeAvatar(e)}/>
+                    {editAvatar && <motion.div onClick={avatarHandler} initial={{ opacity: 0 }} animate={{ opacity: 1}} className={styles.editAvatar}> <img src={plusIcon} width={30} height={30}/></motion.div>}
                     <img src={avatar ? avatar : startAvatar} width={200} height={200}/>
                 </div>
+                {base64Image && <Button clickHandler={confirmAvatar} width={200} height={40}>confirm</Button>}
                 <h1>{username}</h1>
             </div>
             <div className={styles.actions}>

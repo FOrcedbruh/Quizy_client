@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-direction: column;
 }
 .slider {
     width: 300px;
@@ -46,7 +47,7 @@
     align-items: center;
     text-align: center;
     width: 40%;
-    height: 40vh;
+    height: 84vh;
 }
 
 .FlipSlider {
@@ -72,4 +73,76 @@
 .flipSlide p {
     align-self: flex-start;
     font-style: italic;
+}
+
+.container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.secondBlock {
+    user-select: none;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    background-color: #850f8d;
+    border-radius: 40px;
+    box-shadow: 6px 8px 42px 30px rgba(34, 60, 80, 0.2);
+}
+.secondBlock h1 {
+    color: #fff;
+    font-size: 40px;
+}
+
+.guidePicture {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    width: 100%;
+}
+.guidePicture img {
+    width: 70%;
+    height: 100%;
+    border-radius: 20px;
+}
+.guidePicture h2 {
+    color: #fff;
+}
+.guideBtns {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.guideBtns button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+    outline: none;
+    border: 2px solid #f3f3f3;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 5px 20px;
+    transition: all .4s ease;
+}
+.guideBtns button p {
+    padding: 0;
+    margin: 0;
+}
+.guideBtns button img {
+    width: 24px;
+    height: 24px;
 }

@@ -45,7 +45,7 @@ const Registration: React.FC<RegPropsType> = ({setAuthWindowState}) => {
             localStorage.setItem('authUser', JSON.stringify(userData));
             //@ts-ignore
             setAuthUser(userData);
-            setNotification('Аккаунт успешно создан')
+            setNotification('Account successfully create :)')
             navigate('/profile');
         } else {
             setNotification(userData);

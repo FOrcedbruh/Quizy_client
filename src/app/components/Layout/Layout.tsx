@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/autnContext";
 import menuArrow from './../../../images/menuArrow.svg';
 import { logout } from "../../../instance/auth";
+import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useAuthCheck from "../../../zustand/useAuthCheck";
 import useNotifications from "../../../zustand/useNotifications";
 import createIcon from './../../../images/createIcon.svg';
-
+import githubLogo from './../../../images/githubLogo.svg';
 
 
 interface MenuPropsType {
@@ -95,7 +96,15 @@ const Layout: React.FC = () => {
                 <Outlet />
             </main>
             <footer className={styles.footer}>
-
+                <div>
+                    <h1>Quizzy</h1>
+                    <div className={styles.socialNets}>
+                        <a target="_blank" href="https://github.com/FOrcedbruh/Quizy_client.git"><motion.img whileHover={{ scale: 1.2 }} src={githubLogo} alt="github" width={30} height={30}/></a>
+                    </div>
+                </div>
+                <ul>
+                    
+                </ul>
             </footer>
         </>
         

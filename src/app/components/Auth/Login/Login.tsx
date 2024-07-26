@@ -43,7 +43,7 @@ const Login: React.FC<LoginPropsType> = ({setAuthWindowState}) => {
             localStorage.setItem('authUser', JSON.stringify(userData));
             //@ts-ignore
             setAuthUser(userData);
-            setNotification('Успешный вход в аккаунт');
+            setNotification('Successfully login ;)');
             navigate('/profile');
         } else {
             setNotification(userData);

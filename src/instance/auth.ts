@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useState } from "react";
 
 export const instance = axios.create({
     baseURL: 'http://localhost:8080/',
@@ -61,5 +60,14 @@ export const deleteAccount = async (_id: string) => {
     localStorage.clear();
 
     return res.data.message;
+}
+
+export const updateAvatar = async (userId: string, avatar: string): Promise<string> => {
+    const res = await instance.post('auth/setAvatar', {
+        userId,
+        avatar
+    });
+
+    return res.data.message
 }
 

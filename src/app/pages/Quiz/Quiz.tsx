@@ -80,7 +80,7 @@ const Quiz: React.FC = () => {
                 <ul>
                     {quiz?.body[step].answers.map((answer, index) => {
                         return (
-                            <motion.li variants={listVariants} initial={'initial'} animate={'visible'} custom={index + 1} onClick={() => onSelect(index)} key={index} style={{'backgroundColor': quiz.listColor, 'color': quiz.textColor}}>
+                            <motion.li whileHover={{ scale: 1.1}} variants={listVariants} initial={'initial'} animate={'visible'} custom={index + 1} onClick={() => onSelect(index)} key={index} style={{'backgroundColor': quiz.listColor, 'color': quiz.textColor}}>
                                 {answer}
                             </motion.li>
                         )
