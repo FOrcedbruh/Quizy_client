@@ -51,6 +51,7 @@
 .window h2 {
     font-family: "Roboto Mono", monospace;
     font-size: 26px;
+    cursor: pointer;
 }
 .window h2 sup {
    font-style: italic;

@@ -46,3 +46,9 @@ export const deleteQuiz = async (userId: string, quizId: string, index: number):
     return res.data
 }
 
+export const getIdeas = async (): Promise<Array<IQuiz>> => {
+    const res = await instance.get('/quiz/ideas');
+
+    return res.data;
+}
+

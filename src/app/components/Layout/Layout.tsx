@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/autnContext";
 import menuArrow from './../../../images/menuArrow.svg';
 import { logout } from "../../../instance/auth";
-import { motion } from "framer-motion";
+import { animate, motion, transform } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useAuthCheck from "../../../zustand/useAuthCheck";
 import useNotifications from "../../../zustand/useNotifications";
@@ -32,12 +32,22 @@ const Menu: React.FC<MenuPropsType> = ({setMenu}) => {
         navigate('/auth');
     }
 
+    const listVariants = {
+        initial: {
+            opacity: 0,
+        },
+        animate: (custom: number) => ({
+            opacity: 1,
+            transition: { delay: 0.1 * custom}
+        })
+    }
+
 
     return (
         <ul className={styles.menu} onClick={() => setMenu(false)}>
-            <li><Link to={'/profile'}>profile</Link></li>
-            <li><Link to={'/'}>settings</Link></li>
-            <li onClick={logoutHandler}>Log out</li>
+            <motion.li variants={listVariants} initial={'initial'} animate={'animate'} custom={0}><Link to={'/profile'}>profile</Link></motion.li>
+            <motion.li variants={listVariants} initial={'initial'} animate={'animate'} custom={1}><Link to={'/'}>settings</Link></motion.li>
+            <motion.li variants={listVariants} initial={'initial'} animate={'animate'} custom={2} onClick={logoutHandler}>Log out</motion.li>
         </ul>
     )
 }

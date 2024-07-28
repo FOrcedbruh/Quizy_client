@@ -15,6 +15,7 @@ import { motion } from 'framer-motion';
 import startAvatar from './../../../images/avatars/batmanAvatar.svg';
 import plusIcon from './../../../images/createIcon.svg';
 import { updateAvatar } from '../../../instance/auth';
+import Loader from '../../components/Loader/Loader';
 
 
 const Profile: React.FC = () => {
@@ -41,7 +42,7 @@ const Profile: React.FC = () => {
     //@ts-ignore
     const username = authUser?.username;
      //@ts-ignore
-    const avatar = authUser?.avatar;
+    const avatar: string = authUser?.avatar;
     //@ts-ignore
     const _id = authUser?._id;
 
@@ -83,7 +84,7 @@ const Profile: React.FC = () => {
     const avatarPicker = useRef<HTMLInputElement>(null)
 
     const [editAvatar, setEditAvatar] = useState<boolean>(false);
-    const [base64Image, setBase64Image] = useState<any>('');
+    const [file, setFile] = useState<any>();
 
     const avatarHandler = () => {
         if (avatarPicker.current) {
@@ -91,26 +92,32 @@ const Profile: React.FC = () => {
         }
     }
 
+    const [formData, setFormData] = useState(new FormData());
+
     const changeAvatar = async (e: any) => {
-        // console.log(e.target.files[0]);
-        let image = e.target.files[0];
-        const reader = new FileReader();
+        let file = e.target.files[0];
+        setFile(e.target.files[0]);
+        
+        
 
-        if (image) {
-            
-
-            reader.onloadend = () => {
-                setBase64Image(reader.result);
-            }
-            reader.readAsDataURL(image);
+        if (file) {
+            formData.append('file', file);
+            formData.append('userId', _id);
         }
+
     }
 
     const confirmAvatar = async () => {
-        const message = await updateAvatar(_id, base64Image);
+        const data = await updateAvatar(formData);
 
-        setNotification(message);
+        console.log(data);
     }
+
+    if (!username) {
+        return <Loader width='100%' height='100vh'/>
+    }
+
+
 
     return (
         <section className={styles.window}>
@@ -121,18 +128,17 @@ const Profile: React.FC = () => {
                     </Button>
                 </div>
                 <div className={styles.avatar} onMouseOver={() => setEditAvatar(true)} onMouseLeave={() => setEditAvatar(false)}>
-                    <input type="file" className={styles.hidden} ref={avatarPicker} onChange={(e) => changeAvatar(e)}/>
+                    <input type="file" accept='image/jpeg, image/png, image/svg, image/jpg' className={styles.hidden} ref={avatarPicker} onChange={(e) => changeAvatar(e)}/>
                     {editAvatar && <motion.div onClick={avatarHandler} initial={{ opacity: 0 }} animate={{ opacity: 1}} className={styles.editAvatar}> <img src={plusIcon} width={30} height={30}/></motion.div>}
-                    <img src={avatar ? avatar : startAvatar} width={200} height={200}/>
+                    <img alt='avatar' src={avatar ? avatar : startAvatar} width={200} height={200}/>
                 </div>
-                {base64Image && <Button clickHandler={confirmAvatar} width={200} height={40}>confirm</Button>}
+                {file && <Button clickHandler={confirmAvatar} width={200} height={40}>confirm</Button>}
                 <h1>{username}</h1>
             </div>
             <div className={styles.actions}>
                 <p onClick={editHandler} className={styles.editBtn}>{isEditing ? <>editing...</> : <>edit</>}</p>
                 {selected && <i onClick={() => deleteQuizHandler(deletedIndex)}>delete</i>}
             </div>
-            
             <div className={styles.container}>
                 {quizzes.map((item, index) => {
                     return (

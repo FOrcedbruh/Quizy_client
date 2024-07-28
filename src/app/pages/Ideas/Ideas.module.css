@@ -1,0 +1,21 @@
+.window {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 60px;
+}
+.header {
+    align-self: flex-start;
+}
+.ideas {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 30px;
+}

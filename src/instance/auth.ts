@@ -62,12 +62,14 @@ export const deleteAccount = async (_id: string) => {
     return res.data.message;
 }
 
-export const updateAvatar = async (userId: string, avatar: string): Promise<string> => {
-    const res = await instance.post('auth/setAvatar', {
-        userId,
-        avatar
-    });
+export const updateAvatar = async (formData: any) => {
+    const res = await fetch('http://localhost:8080/auth/setAvatar', {
+        method: 'POST',
+        body: formData
+    })
 
-    return res.data.message
+    const resData = await res.json();
+
+    return resData;
 }
 

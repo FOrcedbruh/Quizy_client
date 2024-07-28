@@ -131,10 +131,11 @@
     gap: 10px;
     background-color: transparent;
     outline: none;
-    border: 2px solid #f3f3f3;
+    border: none;
     border-radius: 14px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: large;
     padding: 5px 20px;
     transition: all .4s ease;
 }
@@ -145,4 +146,22 @@
 .guideBtns button img {
     width: 24px;
     height: 24px;
+}
+.toIdeas {
+    position: absolute;
+    top: 20vh;
+    left: 0;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ececec;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 4px 2px 31px 5px rgba(34, 60, 80, 0.2);
+}
+.toIdeas a {
+    color: #850f8d;
+    text-decoration: none;
+    font-weight: 500;
 }

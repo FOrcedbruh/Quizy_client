@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import IQuiz from '../../../types/IQuiz';
 import { motion } from 'framer-motion';
 import Loader from '../../components/Loader/Loader';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useNotifications from '../../../zustand/useNotifications';
 
 
 const Quiz: React.FC = () => {
@@ -17,6 +18,10 @@ const Quiz: React.FC = () => {
     const [quiz, setQuiz] = useState<IQuiz | null>(null);
     const [step, setStep] = useState<number>(0);
     const [corrects, setCorrects] = useState<number>(0);
+
+    const { setNotification } = useNotifications()
+
+    const location = useLocation();
 
     const getData = async () => {
         const data = await GetQuiz(id!);
@@ -50,12 +55,24 @@ const Quiz: React.FC = () => {
         return <Loader width='100%' height='100vh'/>
     }
 
+    
+    
+
+    const copyHandler = async () => {
+        await navigator.clipboard.writeText(`http://localhost:5173${location.pathname}`);
+
+        setNotification('Quiz link coppied:)');
+    }
+
+
     return (
         <section className={styles.window}>
             <h1 onClick={() => navigate('/')}>
                 Quizzy
             </h1>
-            <motion.h2 initial={{
+            <motion.h2 whileHover={{
+                scale: 1.2
+            }} onClick={copyHandler}  initial={{
                 y: -100
             }} animate={{
                 y: 0

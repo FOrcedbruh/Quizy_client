@@ -12,7 +12,8 @@ import askBtnPic  from './../../../images/guidePictures/askBtnPic.svg';
 import shareBtnPic  from './../../../images/guidePictures/shareBtnPic.svg';
 import createBtnPic  from './../../../images/guidePictures/createBtnPic.svg';
 import { useState } from "react";
-
+import sharePicture from './../../../images/guidePictures/share.png';
+import { Link } from "react-router-dom";
 
 interface CardType {
     color: string,
@@ -119,7 +120,7 @@ const guidePictures: IGuidePicture[] = [
         desc: 'Ask the quiz questions and enjoy of proccess...'
     },
     {
-        url: '',
+        url: sharePicture,
         desc: 'Share your quiz to anyone ))'
     }
 ]
@@ -163,6 +164,9 @@ const Home: React.FC = () => {
 
     return (
         <section className={styles.window}>
+            <motion.div initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1, transition: { delay: 0.4 }}} className={styles.toIdeas}>
+                <Link to={"/Ideas"}>Ideas</Link>
+            </motion.div>
             <div className={styles.container}>
                 <div className={styles.slider}>
                     <Swiper
