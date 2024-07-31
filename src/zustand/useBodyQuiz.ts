@@ -13,6 +13,7 @@ const useBodyQuiz = create<StoreType>((set) => ({
         return {body: [...state.body, step]}
     }),
     resetBody: () => set(state => {
+        console.log(state);
         return { body: []}
     })
 }));

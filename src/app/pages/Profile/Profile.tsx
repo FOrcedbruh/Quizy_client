@@ -92,7 +92,8 @@ const Profile: React.FC = () => {
         }
     }
 
-    const [formData, setFormData] = useState(new FormData());
+
+    let formData = new FormData();
 
     const changeAvatar = async (e: any) => {
         let file = e.target.files[0];

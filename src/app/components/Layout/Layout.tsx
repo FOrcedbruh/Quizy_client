@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/autnContext";
 import menuArrow from './../../../images/menuArrow.svg';
 import { logout } from "../../../instance/auth";
-import { animate, motion, transform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import useAuthCheck from "../../../zustand/useAuthCheck";
 import useNotifications from "../../../zustand/useNotifications";

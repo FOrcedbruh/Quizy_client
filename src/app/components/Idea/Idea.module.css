@@ -1,5 +1,26 @@
 .card {
     width: 20%;
-    height: 400px;
+    height: 300px;
     border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    box-shadow: 4px 7px 28px 21px rgba(34, 60, 80, 0.2);
+    cursor: pointer;
+}
+.card h2 {
+    font-size: 20px;
+}
+.card div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+}
+.card div p {
+    padding: 10px;
+    border-radius: 10px;
 }

@@ -14,6 +14,11 @@ import createBtnPic  from './../../../images/guidePictures/createBtnPic.svg';
 import { useState } from "react";
 import sharePicture from './../../../images/guidePictures/share.png';
 import { Link } from "react-router-dom";
+import useAuthCheck from "../../../zustand/useAuthCheck";
+
+
+
+
 
 interface CardType {
     color: string,
@@ -161,12 +166,14 @@ const Home: React.FC = () => {
 
     const [selectedIndex, setIndex] = useState<number>(0);
 
+    const { isAuth } = useAuthCheck();
+
 
     return (
         <section className={styles.window}>
-            <motion.div initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1, transition: { delay: 0.4 }}} className={styles.toIdeas}>
+            {isAuth && <motion.div initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1, transition: { delay: 0.4 }}} className={styles.toIdeas}>
                 <Link to={"/Ideas"}>Ideas</Link>
-            </motion.div>
+            </motion.div>}
             <div className={styles.container}>
                 <div className={styles.slider}>
                     <Swiper
